@@ -2,12 +2,12 @@ CREATE DATABASE IF NOT EXISTS huskyNav;
 USE huskyNav;
 
 CREATE TABLE IF NOT EXISTS Node(
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	x INT,
 	y INT,
 	z INT,
-	room_num INT,
-	building INT
+	room_num TEXT,
+	building TEXT
 );
 
 CREATE TABLE IF NOT EXISTS Teacher(
@@ -29,3 +29,60 @@ CREATE TABLE IF NOT EXISTS Connection(
 	nodeB INT,
 	distance INT
 );
+
+INSERT INTO Node (x, y, z, room_num, building) VALUES
+(178, 178, 1, '101', 'Rekhi'),
+(235, 250, 1, '102', 'Rekhi'),
+(225, 148, 1, '102_Hallway', 'Rekhi'),
+(235, 118, 1, '103', 'Rekhi'),
+(223, 119, 1, '103_Hallway', 'Rekhi'),
+(224, 91, 1, '104', 'Rekhi'),
+(213, 95, 1, '104_Hallway', 'Rekhi'),
+(201, 68, 1, '105', 'Rekhi'),
+(195, 76, 1, '105_Hallway', 'Rekhi'),
+(174, 57, 1, '106', 'Rekhi'),
+(174, 68, 1, '106_Hallway', 'Rekhi'),
+(136, 59, 1, '107', 'Rekhi'),
+(139, 170, 1, '107_Hallway', 'Rekhi'),
+(114, 69, 1, '108', 'Rekhi'),
+(119, 76, 1, '108_Hallway', 'Rekhi'),
+(94, 93, 1, '109', 'Rekhi'),
+(100, 95, 1, '109_Hallway', 'Rekhi'),
+(82, 120, 1, '110', 'Rekhi'),
+(90, 119, 1, '110_Hallway', 'Rekhi'),
+(80, 151, 1, '111', 'Rekhi'),
+(93, 150, 1, '111_Hallway', 'Rekhi'),
+(175, 465, 1, '112A', 'Rekhi'),
+(190, 456, 1, '112A_Hallway', 'Rekhi'),
+(175, 285, 1, '112', 'Rekhi'),
+(190, 285, 1, '112_Hallway', 'Rekhi'),
+(205, 493, 1, '113A', 'Rekhi'),
+(190, 493, 1, '113A_Hallway', 'Rekhi'),
+(205, 312, 1, '113', 'Rekhi'),
+(190, 312, 1, '113_Hallway', 'Rekhi'),
+(175, 487, 1, '114', 'Rekhi'),
+(190, 487, 1, '114_Hallway', 'Rekhi'),
+(215, 560, 1, '115', 'Rekhi'),
+(215, 575, 1, '115_Hallway', 'Rekhi'),
+(245, 560, 1, '116', 'Rekhi'),
+(245, 575, 1, '116_Hallway', 'Rekhi'),
+(164, 575, 1, '117', 'Rekhi'),
+(164, 575, 1, '117_Hallway', 'Rekhi'),
+(138, 587, 1, '118', 'Rekhi'),
+(138, 575, 1, '118_Hallway', 'Rekhi'),
+(205, 288, 1, 'J', 'Rekhi'),
+(93, 560, 1, '1T1', 'Rekhi'),
+(93, 575, 1, '1T1_Hallway', 'Rekhi'),
+(125, 560, 1, '1T2', 'Rekhi'),
+(125, 575, 1, '1T2_Hallway', 'Rekhi'),
+(158, 560, 1, '1E1', 'Rekhi'),
+(158, 575, 1, '1E1_Hallway', 'Rekhi'),
+(190, 575, 1, 'Hallway_Junction', 'Rekhi'),
+(190, 237, 1, 'Rotunda_Junction', 'Rekhi'),
+(253, 190, 1, 'Entry_Junction', 'Rekhi'),
+(217, 161, 1, 'Offices_Right', 'Rekhi'),
+(135, 195, 1, 'Offices_Left', 'Rekhi'),
+(253, 243, 1, 'Restroom_Men', 'Rekhi'),
+(295, 245, 1, 'Restroom_Women', 'Rekhi'),
+(316, 575, 1, 'Staircase_B', 'Rekhi'),
+(275, 200, 1, 'Entry', 'Rekhi');
