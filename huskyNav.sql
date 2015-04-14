@@ -27,10 +27,30 @@ CREATE TABLE IF NOT EXISTS Connection(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nodeA INT,
 	nodeB INT,
-	distance INT
+	distance FLOAT
 );
 
-/* TODO write a trigger to add distance to connection from NodeA and NodeB */
+DELIMITER //
+CREATE TRIGGER setDistance BEFORE INSERT ON Connection
+FOR EACH ROW BEGIN
+    /* This trigger is literally just the distance formula:
+     * distance = Sqrt( (x2 - x1)^2 + (y2 - y1)^2)
+     */
+    DECLARE a_x INT;
+    DECLARE a_y INT;
+    DECLARE b_x INT;
+    DECLARE b_y INT;
+    DECLARE diff_x INT;
+    DECLARE diff_y INT;
+    SET a_x = (SELECT x FROM Node WHERE id = NEW.nodeA);
+    SET a_y = (SELECT y FROM Node WHERE id = NEW.nodeA);
+    SET b_x = (SELECT x FROM Node WHERE id = NEW.nodeB);
+    SET b_y = (SELECT y FROM Node WHERE id = NEW.nodeB);
+    SET diff_x = (SELECT POW( (a_x - b_x), 2));
+    SET diff_y = (SELECT POW( (a_y - b_y), 2));
+    SET NEW.distance = (SELECT SQRT(diff_x + diff_y));
+END//
+DELIMITER ;
 
 INSERT INTO Node (x, y, z, room_num, building) VALUES
 (178, 178, 1, '101', 'Rekhi'),
@@ -255,5 +275,4 @@ INSERT INTO Connection(NodeA, NodeB) VALUES
 
 ((SELECT id FROM Node WHERE z=1 AND room_num='Restroom_Junction' AND building='Rekhi'), 
 (SELECT id FROM Node WHERE z=1 AND room_num='Restroom_Women' AND building='Rekhi'));
-
 /* TODO add the staircase */
