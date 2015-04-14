@@ -24,11 +24,13 @@ CREATE TABLE IF NOT EXISTS Class(
 );
 
 CREATE TABLE IF NOT EXISTS Connection(
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	nodeA INT,
 	nodeB INT,
 	distance INT
 );
+
+/* TODO write a trigger to add distance to connection from NodeA and NodeB */
 
 INSERT INTO Node (x, y, z, room_num, building) VALUES
 (178, 178, 1, '101', 'Rekhi'),
@@ -79,6 +81,7 @@ INSERT INTO Node (x, y, z, room_num, building) VALUES
 (158, 575, 1, '1E1_Hallway', 'Rekhi'),
 (190, 575, 1, 'Hallway_Junction', 'Rekhi'),
 (190, 237, 1, 'Rotunda_Junction', 'Rekhi'),
+(278, 244, 1, 'Restroom_Junction', 'Rekhi'),
 (253, 190, 1, 'Entry_Junction', 'Rekhi'),
 (217, 161, 1, 'Offices_Right', 'Rekhi'),
 (135, 195, 1, 'Offices_Left', 'Rekhi'),
@@ -86,3 +89,171 @@ INSERT INTO Node (x, y, z, room_num, building) VALUES
 (295, 245, 1, 'Restroom_Women', 'Rekhi'),
 (316, 575, 1, 'Staircase_B', 'Rekhi'),
 (275, 200, 1, 'Entry', 'Rekhi');
+
+INSERT INTO Connection(NodeA, NodeB) VALUES
+((SELECT id FROM Node WHERE z=1 AND room_num='118' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='118_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='118_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='1T2_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='118_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='1E1_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='1T2' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='1T2_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='1T2_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='1T1_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='1T1' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='1T1_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='1E1' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='1E1_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='1E1_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='117_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='117' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='117_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='117_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Hallway_Junction' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='113A_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Hallway_Junction' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='115_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Hallway_Junction' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='115' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='115_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='115_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='116_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='116' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='116_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='116_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Staircase_B' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='113A' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='113A_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='113A_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='114_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='114' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='114_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='114_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='112A_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='112A' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='112A_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='112A_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='113_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='113' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='113_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='113_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='112_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='112' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='112_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='112_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='J' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='112_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Rotunda_Junction' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Rotunda_Junction' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Offices_Left' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Rotunda_Junction' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Offices_Right' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Rotunda_Junction' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='101' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Offices_Right' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='102_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Offices_Left' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='111_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='102' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='102_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='102_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='103_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='103' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='103_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='103_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='104_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='104' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='104_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='104_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='105_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='105' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='105_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='105_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='106_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='106' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='106_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='106_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='107_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='107' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='107_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='107_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='108_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='108' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='108_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='108_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='109_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='109' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='109_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='109_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='110_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='110' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='110_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='110_Hallway' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='111_Hallway' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Entry' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Restroom_Junction' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Entry' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Entry_Junction' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Entry_Junction' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Rotunda_Junction' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Restroom_Junction' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Restroom_Men' AND building='Rekhi')),
+
+((SELECT id FROM Node WHERE z=1 AND room_num='Restroom_Junction' AND building='Rekhi'), 
+(SELECT id FROM Node WHERE z=1 AND room_num='Restroom_Women' AND building='Rekhi'));
+
+/* TODO add the staircase */
